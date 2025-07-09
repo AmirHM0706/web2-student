@@ -2,39 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Educational Web 2 Course Website Design System
+Persian/Farsi RTL Support with Modern Educational Theme
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Educational Theme Colors */
+    --background: 210 25% 98%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Educational Blue Primary */
+    --primary: 210 90% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 210 85% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Soft Educational Secondary */
+    --secondary: 200 20% 94%;
+    --secondary-foreground: 215 25% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 200 15% 92%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent for highlights */
+    --accent: 190 75% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 200 20% 88%;
+    --input: 200 20% 90%;
+    --ring: 210 90% 45%;
+
+    /* Educational Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210, 90%, 45%), hsl(190, 75%, 50%));
+    --gradient-hero: linear-gradient(180deg, hsl(210, 25%, 98%) 0%, hsl(200, 30%, 95%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(200, 20%, 98%) 100%);
+
+    /* Shadows for depth */
+    --shadow-soft: 0 4px 12px -2px hsl(210, 25%, 15%, 0.08);
+    --shadow-medium: 0 8px 24px -4px hsl(210, 25%, 15%, 0.12);
+    --shadow-glow: 0 0 30px hsl(210, 90%, 45%, 0.3);
+
+    /* Educational spacing */
+    --spacing-section: 4rem;
 
     --radius: 0.5rem;
 
@@ -101,5 +120,125 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* RTL Support for Persian */
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+
+  html[dir="rtl"] .flex-row {
+    flex-direction: row-reverse;
+  }
+
+  html[dir="rtl"] .text-left {
+    text-align: right;
+  }
+
+  html[dir="rtl"] .text-right {
+    text-align: left;
+  }
+}
+
+@layer components {
+  /* Educational Card Styles */
+  .edu-card {
+    @apply bg-card border border-border rounded-xl p-6;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .edu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M20 20c0 11.046-8.954 20-20 20v20h40V20H20z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animated Underline */
+  .animated-underline {
+    position: relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+  }
+
+  .animated-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Section Spacing */
+  .section-spacing {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+
+  /* Persian Text Styling */
+  .persian-text {
+    font-weight: 400;
+    line-height: 1.8;
+    text-align: right;
+    direction: rtl;
+  }
+
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Fade In Animation */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
